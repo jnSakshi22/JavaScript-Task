@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task</title>
+  </head>
+  <body>
+    <!-- External JavaScript file -->
+    <script src="./index.js"></script>
+
+    <!-- Buttons for changing background color -->
+    <button id="btn1">Change BG to Red</button>
+    <button id="btn2">Change BG to Green</button>
+    <button id="btn3">Change BG to White</button>
+    <button id="btn4">Change BG to Blue</button>
+
+    <!-- First container with paragraph -->
+    <div class="container">
+      <p id="para-txt">
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book. It has survived not only five
+        centuries, but also the leap into electronic typesetting, remaining
+        essentially unchanged. It was popularised in the 1960s with the release
+        of Letraset sheets containing Lorem Ipsum passages, and more recently
+        with desktop publishing software like Aldus PageMaker including versions
+        of Lorem Ipsum.
+      </p>
+    </div>
+
+    <!-- Second container with another paragraph -->
+    <div class="container2">
+      <p id="para-txt2">Hello, Good Morning! My Name is Sakshi Jain</p>
+    </div>
+
+    <!-- ToDo App container -->
+    <div class="toDo-container">
+      <h1>ToDo App</h1>
+      <h2>Tasks</h2>
+      <input
+        type=" text"
+        style="height: 50px; width: 700px"
+        id="task-txt"
+        placeholder="Task Details..."
+      />
+
+      <div>
+        <button id="add-btn">Add Task</button>
+      </div>
+      <div>
+        <ul id="todo-list"></ul>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  // Show message in console
+  console.log("Show console using script tag");
+
+  // Change body background color page load
+  window.addEventListener("load", function () {
+    document.body.style.background = "teal";
+  });
+
+  // Get button elements
+  const btnRedElem = document.getElementById("btn1");
+  const btnGreenElem = document.getElementById("btn2");
+  const btnWhiteElem = document.getElementById("btn3");
+  const btnBlueElem = document.getElementById("btn4");
+
+  // Add Event Listener to change body background color on button click
+  btnRedElem.addEventListener("click", () => {
+    document.body.style.backgroundColor = "red";
+  });
+  btnGreenElem.addEventListener("click", () => {
+    document.body.style.backgroundColor = "green";
+  });
+  btnWhiteElem.addEventListener("click", () => {
+    document.body.style.backgroundColor = "white";
+  });
+  btnBlueElem.addEventListener("click", () => {
+    document.body.style.backgroundColor = "blue";
+  });
+
+  // Change paragraph text color
+  const paraTxt = document.getElementById("para-txt");
+  paraTxt.style.color = "darkgrey";
+
+  setTimeout(() => {
+    document.getElementById("para-txt2").innerHTML =
+      "Hello, Good Evening! My Name is Radhika ";
+  }, 5000);
+
+  // Create and append ul element with 5 list items
+  const ulElem = document.createElement("ul");
+  for (let i = 1; i <= 5; i++) {
+    let listElem = document.createElement("li");
+    listElem.textContent = "Item" + i;
+    ulElem.appendChild(listElem);
+  }
+  document.body.appendChild(ulElem);
+
+  // ToDo app functionality
+  const todoList = document.getElementById("todo-list");
+  const taskText = document.getElementById("task-txt");
+  const addbtnElem = document.getElementById("add-btn");
+
+  // Add Event Listener for adding new task
+  addbtnElem.addEventListener("click", () => {
+    console.log("Button Clicked Successfully");
+
+    const newTask = taskText.value;
+
+    if (newTask === "") {
+      alert("Please enter a valid task!");
+      return;
+    }
+
+    taskText.value = "";
+
+    const listItem = document.createElement("li");
+    listItem.textContent = newTask;
+
+    // Create delete button for each task
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.style.marginLeft = "10px";
+
+    // Add Event Listener to delete the task
+    deleteBtn.addEventListener("click", () => {
+      todoList.removeChild(listItem);
+    });
+
+    listItem.appendChild(deleteBtn);
+    todoList.appendChild(listItem);
+  });
+</script>
